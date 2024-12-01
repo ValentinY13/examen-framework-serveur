@@ -1,0 +1,52 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}
+    Modifier formation
+{% endblock %}
+
+{% block body %}
+    <section class="w-1/2">
+        <div>
+            <h2 class="text-3xl font-bold my-4">Modifier une formation</h2>
+            {{ form_start(form) }}
+            <div class="flex gap-2">
+                <div class="w-full">
+                    {{ form_row(form.name) }}
+                </div>
+                <div class="w-full">
+                    {{ form_row(form.price) }}
+                </div>
+            </div>
+
+            <div class="flex gap-2">
+                <div class="w-full">
+                    {{ form_row(form.created_at) }}
+                </div>
+                <div class="w-full">
+                    {{ form_row(form.duration) }}
+                </div>
+            </div>
+            {{ form_row(form.small_description) }}
+            {{ form_row(form.full_description) }}
+            <div class="flex gap-2">
+                <div class="w-full">
+                    {{ form_row(form.imageFile) }}
+                </div>
+                <div class="w-full">
+                    {{ form_row(form.programFile) }}
+                </div>
+            </div>
+            <div class="flex gap-2">
+                <div class="w-full">
+                    {{ form_row(form.level) }}
+                </div>
+                <div class="w-full">
+                    {{ form_row(form.category) }}
+                </div>
+            </div>
+            <input type="submit" value="Modifier" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            {{ form_end(form) }}
+        </div>
+    </section>
+{% endblock %}
+

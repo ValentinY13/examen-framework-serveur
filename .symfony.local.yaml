@@ -1,0 +1,4 @@
+# permet de faire tourner le watcher au moment du 'symfony serve'
+workers:
+  tailwind:
+    cmd: ['symfony', 'console', 'tailwind:build', '--watch']

@@ -1,0 +1,143 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="center-container flex-row">
+        <h1 class="text-2xl font-bold py-12">{{ course.name|capitalize }}</h1>
+        <div class="md:flex">
+            <ul
+                    id="default-tab"
+                    data-tabs-toggle="#default-tab-content"
+                    role="tablist"
+                    data-tabs-active-classes="bg-blue-700 text-white"
+                    data-tabs-inactive-classes="hover:text-gray-900 bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white"
+                    class="flex-column space-y space-y-4 text-sm font-medium text-gray-500 dark:text-gray-400 md:me-4 mb-4 md:mb-0">
+                <li role="presentation">
+                    <button id="profile-tab" data-tabs-target="#profile" class="inline-flex w-full items-center px-4 py-3 rounded-lg" role="tab" type="button" aria-controls="profile" aria-selected="false">
+                        {{ ux_icon('heroicons:user-circle', {class: 'mr-1 w-5 h-5'}) }}
+                        Profil
+                    </button>
+                </li>
+                <li role="presentation">
+                    <button id="detail-tab" data-tabs-target="#detail" role="tab" type="button" aria-controls="detail" aria-selected="false" class="inline-flex items-center px-4 py-3 rounded-lg hover:text-gray-900 bg-gray-50 hover:bg-gray-100 w-full dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white">
+                        {{ ux_icon('heroicons:document-text', {class: 'mr-1 w-5 h-5'}) }}
+                        Détail
+                    </button>
+                </li>
+                <li role="presentation">
+                    <button id="comment-tab" data-tabs-target="#comment" role="tab" type="button" aria-controls="comment" aria-selected="false" class="inline-flex items-center px-4 py-3 rounded-lg hover:text-gray-900 bg-gray-50 hover:bg-gray-100 w-full dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white">
+                        {{ ux_icon('heroicons:chat-bubble-bottom-center-text', {class: 'mr-1 w-5 h-5'}) }}
+                        Commentaires
+                    </button>
+                </li>
+                <li role="presentation">
+                    <button id="post-comment-tab" data-tabs-target="#post-comment" role="tab" type="button" aria-controls="post-comment" aria-selected="false" class="inline-flex items-center px-4 py-3 rounded-lg hover:text-gray-900 bg-gray-50 hover:bg-gray-100 w-full dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white">
+                        {{ ux_icon('heroicons:chat-bubble-left-right', {class: 'mr-1 w-5 h-5'}) }}
+                        Poster un commentaire
+                    </button>
+                </li>
+            </ul>
+            <div id="default-tab-content" class="p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full">
+                <div id="profile" role="tabpanel" aria-labelledby="profile-tab" class="hidden flex gap-4">
+                    <img class="w-1/2" src="{{ asset('images/courses/'~course.image ) }}" alt="{{ course.name }}">
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Description</h3>
+                        <p class="mb-2">{{ course.smallDescription }}</p>
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Informations</h3>
+                        <p class="mb-2">Prix: {{ course.price }} €</p>
+                        <p class="mb-2">Durée: {{ course.duration }} ans</p>
+                        <p class="mb-2">Catégorie: {{ course.category.name }}</p>
+                        <p class="mb-2">Ajouté le: {{ course.createdAt|date('d/m/Y') }}</p>
+                        <p class="mb-2">Niveau {{ course.level.name }}</p>
+                    </div>
+                </div>
+                <div id="detail" role="tabpanel" aria-labelledby="detail-tab" class="hidden">
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Description complète</h3>
+                    <p class="mb-2">{{ course.fullDescription }}</p>
+                    <a href="{{ asset('programs/' ~ course.program) }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 mt-4" download>Télécharger le programme</a>
+
+                </div>
+                <div id="comment" role="tabpanel" aria-labelledby="comment-tab" class="hidden">
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Commentaires :</h3>
+                    {% for comment in course.comments %}
+                        {% if not comment.isDisabled %}
+                            <article class="p-6 text-base bg-white border-t border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+                                <footer class="flex justify-between items-center mb-2">
+                                    <div class="flex items-center">
+                                        <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold"><img
+                                                    class="mr-2 w-6 h-6 rounded-full"
+                                                    src="{{ asset('images/avatar/' ~ comment.user.image) }}"
+                                                    alt="Helene Engels">{{ comment.user.firstname }} - {{ comment.user.lastname }}</p>
+                                        <p class="text-sm text-gray-600 dark:text-gray-400"><time>{{ comment.createdAt | date('d/m/Y') }}</time></p>
+                                    </div>
+                                </footer>
+                                <div class="flex">
+                                    {% for i in 1..5 %}
+                                        {% if i <= comment.cotation %}
+                                            <!-- SVG étoile pleine -->
+                                            {{ ux_icon('heroicons:star-solid', {class: 'mr-1 w-5 h-5 text-yellow-500'}) }}
+                                        {% else %}
+                                            <!-- SVG étoile vide -->
+                                            {{ ux_icon('heroicons:star', {class: 'mr-1 w-5 h-5 text-yellow-500'}) }}
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                <p class="text-gray-500 dark:text-gray-400">{{ comment.content }}</p>
+                            </article>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div id="post-comment" role="tabpanel" aria-labelledby="post-comment-tab" class="hidden">
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Poster un commentaire</h3>
+                    {% if app.user %}
+                        {# Already post a comment #}
+                        {% if userComment %}
+                            <p>Vous ne pouvez poster qu'un seul commentaire par formation</p>
+                        {% else %}
+                            {{ form_start(form) }}
+                            {{ form_widget(form) }}
+                            <input type="submit" value="Ajouter" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                            {{ form_end(form) }}
+                        {% endif %}
+                    {% else %}
+                        <p class="py-8">Connectez-vous pour poster un commentaire</p>
+                        <a href="{{ path('app_login') }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            Me connecter
+                            {{ ux_icon('heroicons:arrow-top-right-on-square', {class: 'ml-2 -mr-1 w-5 h-5'}) }}
+                        </a>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="center-container">
+        <h2 class="text-2xl font-bold py-12">Related courses</h2>
+        <div class="flex justify-between w-full">
+
+            {% for course in relatedCourses %}
+            <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 relative">
+                <span class="bg-blue-100 text-blue-800 text-sm mt-2 mr-2 font-medium px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400 absolute right-0">{{ course.category.name|upper }}</span>
+                <a href="{{ path('app_detail', {slug:course.slug}) }}">
+                    <img class="rounded-t-lg" src="{{ asset('images/courses/'~ course.image) }}" alt="" />
+                </a>
+                <div class="p-5">
+                    <a href="{{ path('app_detail', {slug:course.slug}) }}">
+                        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">{{ course.name|capitalize }}</h5>
+                    </a>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ course.smallDescription|u.truncate(75, '...', false) }}</p>
+                    <a href="{{ path('app_detail', {slug: course.slug}) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Read more
+                        {{ ux_icon('heroicons:arrow-right-20-solid', {class: 'ml-2 -mr-1 w-5 h-5'}) }}
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}
+
+{% block title %}
+    {{ course.name }}
+{% endblock %}
+

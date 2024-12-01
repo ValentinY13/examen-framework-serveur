@@ -1,0 +1,86 @@
+<aside id="sidebar-multi-level-sidebar" class="rounded-md shadow z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+    <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+        <ul class="space-y-2 text-sm">
+            <li>
+                <button type="button" class="flex items-center w-full p-2 text-base font-semibold text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-formation" data-collapse-toggle="dropdown-formation">
+                    {{ ux_icon('heroicons:academic-cap', {class: 'ml-2 -mr-1 w-5 h-5'}) }}
+                    <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Formations</span>
+                    {{ ux_icon('heroicons:chevron-down-20-solid', {class: 'ml-2 -mr-1 w-5 h-5'}) }}
+                </button>
+                <ul id="dropdown-formation" class="hidden py-2 space-y-2">
+                    <li>
+                        <a href="{{ path('app_admin_course') }}" class="text-sm font-normal flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-6">Gestion des formations</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_admin_course_add') }}" class="text-sm font-normal flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-6">Ajouter une formation</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <button type="button" class="flex items-center w-full p-2 text-base font-semibold text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-category" data-collapse-toggle="dropdown-category">
+                    {{ ux_icon('heroicons:tag', {class: 'ml-2 -mr-1 w-5 h-5'}) }}
+                    <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Catégories</span>
+                    {{ ux_icon('heroicons:chevron-down-20-solid', {class: 'ml-2 -mr-1 w-5 h-5'}) }}
+                </button>
+                <ul id="dropdown-category" class="hidden py-2 space-y-2">
+                    <li>
+                        <a href="{{ path('app_admin_category') }}" class="text-sm font-normal flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-6">Gestion des catégories</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_admin_category_add') }}" class="text-sm font-normal flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-6">Ajouter une catégorie</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="{{ path('app_admin_user') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    {{ ux_icon('heroicons:users', {class: 'ml-2 -mr-1 w-5 h-5'}) }}
+                    <span class="flex-1 ms-3 whitespace-nowrap font-semibold">Utilisateurs</span>
+                </a>
+            </li>
+            <li>
+                <button type="button" class="flex items-center w-full p-2 text-base font-semibold text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-news" data-collapse-toggle="dropdown-news">
+                    {{ ux_icon('heroicons:newspaper', { class: 'ml-2 -mr-1 w-5 h-5' }) }}
+                    <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Actualités</span>
+                    {{ ux_icon('heroicons:chevron-down-20-solid', {class: 'ml-2 -mr-1 w-5 h-5'}) }}
+                </button>
+                <ul id="dropdown-news" class="hidden py-2 space-y-2">
+                    <li>
+                        <a href="{{ path('app_admin_news') }}" class="text-sm font-normal flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-6">Gestion des actualités</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_admin_news_add') }}" class="text-sm font-normal flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-6">Ajouter une actualité</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <button type="button" class="flex items-center w-full p-2 text-base font-semibold text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-levels" data-collapse-toggle="dropdown-levels">
+                    {{ ux_icon('heroicons:circle-stack', { class: 'ml-2 -mr-1 w-5 h-5' }) }}
+                    <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Niveaux</span>
+                    {{ ux_icon('heroicons:chevron-down-20-solid', {class: 'ml-2 -mr-1 w-5 h-5'}) }}
+                </button>
+                <ul id="dropdown-levels" class="hidden py-2 space-y-2">
+                    <li>
+                        <a href="{{ path('app_admin_level') }}" class="text-sm font-normal flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-6">Gestion des niveaux</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_admin_level_add') }}" class="text-sm font-normal flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-6">Ajouter un niveau</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="{{ path('app_admin_comment') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    {{ ux_icon('heroicons:chat-bubble-bottom-center-text', { class: 'ml-2 -mr-1 w-5 h-5' }) }}
+                    <span class="flex-1 ms-3 whitespace-nowrap font-semibold">Commentaires</span>
+                </a>
+            </li>
+        </ul>
+        <a href="{{ path('app_home') }}" type="button" class="px-5 py-2.5 text-sm font-medium text-white flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-4 w-fit">
+            {{ ux_icon('heroicons:arrow-top-right-on-square-solid', {class: 'mr-1 w-5 h-5'}) }}
+            Retour au site
+        </a>
+    </div>
+</aside>
+<div class="absolute top-6 right-6 z-10">
+    <span class="text-xl">Bienvenue {{ app.user.firstName }}</span>
+</div>
+

@@ -1,0 +1,12 @@
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div id="alert-1" class="absolute top-8 left-1/2 transform -translate-x-1/2 z-50 flex items-center p-4 mb-4 text-{{ label }}-700 rounded-lg bg-{{ label }}-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+            <div class="ms-3 text-sm font-medium">
+                {{ message }}
+            </div>
+            <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-{{ label }}-50 text-{{ label }}-700 rounded-lg inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-blue-400 dark:hover:bg-gray-700" data-dismiss-target="#alert-1" aria-label="Close">
+                {{ ux_icon('heroicons:x-mark', {class: 'w-5 h-5 ml-1'}) }}
+            </button>
+        </div>
+    {% endfor %}
+{% endfor %}

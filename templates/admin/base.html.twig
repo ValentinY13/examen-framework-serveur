@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" lang="fr">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Administration{% endblock %}</title>
+    {% block stylesheets %}
+    {% endblock %}
+    {% block javascripts %}
+        {% block importmap %}{{ importmap('app') }}{% endblock %}
+    {% endblock %}
+</head>
+<body>
+<div class="flex mt-6 ml-4 gap-6">
+    {% include 'admin/partials/sidebar.html.twig' %}
+    {% include 'admin/partials/flash.html.twig' %}
+    <div class="w-full">
+        {% block body %}{% endblock %}
+    </div>
+</div>
+
+</body>
+</html>

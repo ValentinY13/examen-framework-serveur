@@ -1,0 +1,51 @@
+{% if pageCount > 1 %}
+    <div class="flex justify-center mt-4">
+        <nav aria-label="Pagination">
+            <ul class="flex items-center space-x-1">
+                {% if first is defined and current != first %}
+                    <li>
+                        <a href="{{ path(route, knp_pagination_query(query, first)) }}" class="px-4 py-2 text-sm font-medium text-blue-600 bg-white border border-gray-300 rounded-l hover:bg-blue-50" aria-label="First">
+                            &lt;&lt;
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% if previous is defined %}
+                    <li>
+                        <a href="{{ path(route, knp_pagination_query(query, previous)) }}" class="px-4 py-2 text-sm font-medium text-blue-600 bg-white border border-gray-300 hover:bg-blue-50" aria-label="Previous">
+                            &lt;
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% for page in pagesInRange %}
+                    {% if page != current %}
+                        <li>
+                            <a href="{{ path(route, knp_pagination_query(query, page)) }}" class="px-4 py-2 text-sm font-medium text-blue-600 bg-white border border-gray-300 hover:bg-blue-50">{{ page }}</a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <span class="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-blue-600 rounded">{{ page }}</span>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if next is defined %}
+                    <li>
+                        <a href="{{ path(route, knp_pagination_query(query, next)) }}" class="px-4 py-2 text-sm font-medium text-blue-600 bg-white border border-gray-300 hover:bg-blue-50" aria-label="Next">
+                            &gt;
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% if last is defined and current != last %}
+                    <li>
+                        <a href="{{ path(route, knp_pagination_query(query, last)) }}" class="px-4 py-2 text-sm font-medium text-blue-600 bg-white border border-gray-300 rounded-r hover:bg-blue-50" aria-label="Last">
+                            &gt;&gt;
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+{% endif %}

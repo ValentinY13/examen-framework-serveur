@@ -1,0 +1,52 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Gestion des niveaux{% endblock %}
+
+{% block body %}
+    <main>
+        <section>
+            <h1 class="text-2xl font-bold mb-2">Gestion des niveaux</h1>
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-4">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3" {% if levels.isSorted('Nom') %} class="sorted"{% endif %}>
+                            {{ knp_pagination_sortable(levels, 'Nom', 'name') }}
+                        </th>
+                        <th scope="col" class="px-6 py-3" {% if levels.isSorted('Prérequis') %} class="sorted"{% endif %}>
+                            {{ knp_pagination_sortable(levels, 'Prérequis', 'prerequisite') }}
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Actions
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for level in levels %}
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td class="px-6 py-4">
+                                {{ level.name }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ level.prerequisite }}
+                            </td>
+                            <td class="px-6 py-4 mt-4 flex items-center h-full gap-1">
+                                {# Edit button #}
+                                <a href="{{ path('app_admin_level_edit', {id: level.id}) }}">
+                                    {{ ux_icon('heroicons:pencil-square-solid', {class: 'w-5 h-5 hover:text-blue-500'}) }}
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+
+
+            <div>
+                {{ knp_pagination_render(levels, 'partials/pagination.html.twig') }}
+            </div>
+        </section>
+    </main>
+{% endblock %}

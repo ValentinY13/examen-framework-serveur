@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Actualités{% endblock %}
+
+{% block body %}
+    <section class="center-container">
+        <h1 class="text-2xl font-bold py-12">Actualités</h1>
+        <div class="max-w-screen-xl flex flex-wrap gap-y-6 items-center justify-between mx-auto p-4">
+            {% for new in news %}
+                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 relative">
+
+                    <img class="rounded-t-lg" src="{{ asset('images/news/'~new.image) }}" alt="new.name" />
+                    <div class="p-5">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ new.name|capitalize }}</h5>
+                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ new.content|u.truncate(75, '...', false) }}</p>
+
+                        <!-- Modal toggle -->
+                        <button
+                                data-modal-target="modal-{{ new.id }}"
+                                data-modal-toggle="modal-{{ new.id }}"
+                                class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                type="button">
+                            Voir plus
+                        </button>
+
+                        <!-- Main modal -->
+                        <div id="modal-{{ new.id }}" tabindex="-1" aria-hidden="true"
+                             class="hidden fixed inset-0 z-50 flex justify-center items-center w-full h-full bg-gray-900 bg-opacity-50">
+                            <div class="relative w-full max-w-2xl h-auto">
+                                <!-- Modal content -->
+                                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 max-h-[90vh] overflow-hidden">
+                                    <!-- Modal header -->
+                                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                            {{ new.name|capitalize }}
+                                        </h3>
+                                        <button type="button"
+                                                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                                data-modal-hide="modal-{{ new.id }}">
+                                            {{ ux_icon('heroicons:x-mark', {class: 'w-5 h-5'}) }}
+                                        </button>
+                                    </div>
+                                    <!-- Modal body -->
+                                    <div class="p-4 md:p-5 space-y-4 overflow-y-auto max-h-[70vh]">
+                                        <img class="rounded-t-lg" src="{{ asset('images/news/'~new.image) }}" alt="new.name" />
+                                        <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                                            {{ new.content }}
+                                        </p>
+                                    </div>
+                                    <!-- Modal footer -->
+                                    <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                        <button data-modal-hide="modal-{{ new.id }}" type="button"
+                                                class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                            Fermer
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+        <div class="flex justify-center w-full">
+            {{ knp_pagination_render(news, 'partials/pagination.html.twig') }}
+        </div>
+    </section>
+
+{% endblock %}

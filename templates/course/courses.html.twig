@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Courses{% endblock %}
+
+{% block body %}
+
+    <section class="center-container">
+        <h1 class="text-2xl font-bold py-12">Nos formations</h1>
+        <div class="max-w-screen-xl flex flex-wrap gap-y-6 items-center justify-between mx-auto py-4">
+            {% for course in courses %}
+                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 relative">
+                    <span class="bg-blue-100 text-blue-800 text-sm mt-2 mr-2 font-medium px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400 absolute right-0">{{ course.category.name|upper }}</span>
+                    <a href="{{ path('app_detail', {slug:course.slug}) }}">
+                        <img class="rounded-t-lg" src="{{ asset('images/courses/'~course.image) }}" alt="course.name" />
+                    </a>
+                    <div class="p-5">
+                        <a href="{{ path('app_detail', {slug:course.slug}) }}">
+                            <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">{{ course.name|capitalize }}</h5>
+                        </a>
+                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ course.smallDescription|u.truncate(75, '...', false) }}</p>
+                        <a href="{{ path('app_detail', {slug:course.slug}) }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            Read more
+                            {{ ux_icon('heroicons:arrow-right-20-solid', {class: 'ml-2 -mr-1 w-5 h-5'}) }}
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="flex justify-center w-full">
+                {{ knp_pagination_render(courses, 'partials/pagination.html.twig') }}
+            </div>
+        </div>
+    </section>
+{% endblock %}
