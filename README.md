@@ -28,7 +28,7 @@ Créez la base de données définie dans DATABASE_URL :
 php bin/console doctrine:database:create
 ```
 
-Exécutez les migrations pour mettre à jour la structure de la base de données :
+Exécutez les migrations pour mettre à jour la structure de la base de données et supprimer les potentiels migrations déjà existante:
 
 ```bash
 php bin/console make:migration
@@ -42,3 +42,4 @@ php bin/console doctrine:migrations:migrate
 
 ```bash
 symfony server:start
+```
